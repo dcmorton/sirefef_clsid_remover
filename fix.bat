@@ -18,8 +18,8 @@ echo.
 echo Sirefef.P does not seem to be present on this machine
 echo.
 set /p question= Are you sure you want to continue? (Y or N)
-if question == Y goto repair
-if question == y goto repair
+if %question% == Y goto repair
+if %question% == y goto repair
 goto quiting
 
 :infected
@@ -28,8 +28,8 @@ echo.
 echo Sirefef.P infection found on this machine
 echo.
 set /p question2= Ready to start repair? (Y or N)
-if question == Y goto repair
-if question == y goto repiar
+if %question2% == Y goto repair
+if %question2% == y goto repiar
 goto quiting
 
 :repair
