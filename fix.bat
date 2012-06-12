@@ -9,8 +9,8 @@ echo This variant can be identifed by an "n" file
 echo found in Process Explorer in DLL view for explorer.exe
 
 reg query HKLM\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 | find /i "wbemess.dll" > null
-if %%errorlevel%% == 0 goto not_infected
-if %%errorlevel%% == 1 goto infected
+if %errorlevel% == 0 goto not_infected
+if %errorlevel% == 1 goto infected
 
 :not_infected
 cls
