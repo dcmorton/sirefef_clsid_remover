@@ -34,22 +34,25 @@ goto repair
 
 :repair
 cls
-echo.
-echo Doing repair
 reg add HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 /ve /t reg_expand_sz /d ^%systemroot^%\system32\wbem\wbemess.dll /f
 reg delete HKCU\Software\Classes\clsid\{42aedc87-2188-41fd-b9a3-0c966feabec1} /f
 goto done
 
 :done
 cls
+Title Repair done
 echo.
 echo Repair has been completed
 echo.
-echo Reboot your PC to complete the repair
+echo Reboot your PC to complete
 echo.
+pause
+exit
 
 :quiting
 cls
 echo.
 echo Repair Cancelled.
 echo.
+pause
+exit
