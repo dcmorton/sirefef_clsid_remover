@@ -20,8 +20,8 @@ echo.
 echo Sirefef.P does not seem to be present on this machine
 echo.
 set /p prompt= Are you sure you want to continue? (Y or N) 
-if %prompt% == Y goto repair
-if %prompt% == y goto repair
+if %prompt% == Y goto sanity
+if %prompt% == y goto sanity
 goto quiting
 
 :infected
@@ -30,12 +30,45 @@ echo.
 echo Sirefef.P infection found on this machine
 echo.
 pause
+goto sanity
+
+:sanity
+if not exist "\sirefefp_fix\postfix.bat" goto error
 goto repair
 
 :repair
 cls
 reg add HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 /ve /t reg_expand_sz /d ^%systemroot^%\system32\wbem\wbemess.dll /f
 reg delete HKCU\Software\Classes\clsid\{42aedc87-2188-41fd-b9a3-0c966feabec1} /f
+goto detect
+
+:detect
+SET Version=Unknown
+
+VER | FINDSTR /IL "5.1." > NUL
+IF %ERRORLEVEL% EQU 0 SET Version=XP
+
+VER | FINDSTR /IL "6.0." > NUL
+IF %ERRORLEVEL% EQU 0 SET Version=Vista
+
+VER | FINDSTR /IL "6.1." > NUL
+IF %ERRORLEVEL% EQU 0 SET Version=7 
+
+if %Version% == Unknown goto error
+if %Version% == XP goto XP_start
+if %Version% == Vista goto Vista_start
+if %Version% == 7 goto 7_start
+
+:XP_start
+schtasks /create /sc onlogon /tn postifx /tr '"\sirefefp_fix\postfix.bat"'
+goto done
+
+:Vista_start
+schtasks /create /sc onlogon /tn postifx /tr '"\sirefefp_fix\postfix.bat"' /RL HIGHEST
+goto done
+
+:7_start
+schtasks /create /sc onlogon /tn postifx /tr '"\sirefefp_fix\postfix.bat"' /RL HIGHEST
 goto done
 
 :done
@@ -45,6 +78,14 @@ echo.
 echo Repair has been completed
 echo.
 echo Reboot your PC to complete
+echo.
+pause
+exit
+
+:error
+cls
+echo.
+echo An unexpected error has occured.
 echo.
 pause
 exit
