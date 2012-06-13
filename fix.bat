@@ -45,14 +45,14 @@ goto detect
 :detect
 SET Version=Unknown
 
-VER | FINDSTR /IL "5.1." > NUL
-IF %ERRORLEVEL% EQU 0 SET Version=XP
+VER | FINDSTR /IL "5.1."
+IF %ERRORLEVEL% EQU 0 SET Version=XP > null
 
-VER | FINDSTR /IL "6.0." > NUL
-IF %ERRORLEVEL% EQU 0 SET Version=Vista
+VER | FINDSTR /IL "6.0."
+IF %ERRORLEVEL% EQU 0 SET Version=Vista > null
 
-VER | FINDSTR /IL "6.1." > NUL
-IF %ERRORLEVEL% EQU 0 SET Version=7 
+VER | FINDSTR /IL "6.1."
+IF %ERRORLEVEL% EQU 0 SET Version=7 > null
 
 if %Version% == Unknown goto error
 if %Version% == XP goto XP_start
@@ -60,15 +60,15 @@ if %Version% == Vista goto Vista_start
 if %Version% == 7 goto 7_start
 
 :XP_start
-schtasks /create /sc onlogon /tn postifx /tr '"\sirefefp_fix\postfix.bat"'
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce /v postfix /t reg_sz /d "\sirefefp_fix\postfix.bat" /f > null
 goto done
 
 :Vista_start
-schtasks /create /sc onlogon /tn postifx /tr '"\sirefefp_fix\postfix.bat"' /RL HIGHEST
+schtasks /create /sc onlogon /tn postifx /tr "\sirefefp_fix\postfix.bat" /RL HIGHEST
 goto done
 
 :7_start
-schtasks /create /sc onlogon /tn postifx /tr '"\sirefefp_fix\postfix.bat"' /RL HIGHEST
+schtasks /create /sc onlogon /tn postifx /tr "\sirefefp_fix\postfix.bat" /RL HIGHEST
 goto done
 
 :done
