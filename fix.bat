@@ -64,11 +64,11 @@ reg add HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce /v postfix /t reg
 goto done
 
 :Vista_start
-schtasks /create /sc onlogon /tn postifx /tr "\sirefefp_fix\postfix.bat" /RL HIGHEST
+schtasks /create /sc onlogon /tn postfix /tr "\sirefefp_fix\postfix.bat" /RL HIGHEST
 goto done
 
 :7_start
-schtasks /create /sc onlogon /tn postifx /tr "\sirefefp_fix\postfix.bat" /RL HIGHEST
+schtasks /create /sc onlogon /tn postfix /tr "\sirefefp_fix\postfix.bat" /RL HIGHEST
 goto done
 
 :done
