@@ -73,11 +73,11 @@ goto done
 
 :done
 cls
-Title Repair done
+Title Fix done
 echo.
-echo Repair has been completed
+echo Fix has been completed
 echo.
-echo Reboot your PC to complete
+echo Reboot your PC to clean up
 echo.
 pause
 exit
