@@ -66,7 +66,7 @@ reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce /v postfix /t 
 goto done
 
 :vista7_wrap
-schtasks /delete /tn postfix
+schtasks /delete /tn postfix /f
 goto done
 
 :done
