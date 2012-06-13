@@ -89,3 +89,6 @@ pause
 cd \
 rmdir /q /s \sirefefp_fix
 exit
+
+::(C) 2012 Derek Morton
+:: This tool is free software licensed under GPLv3. See LICENSE.txt for complete details.
