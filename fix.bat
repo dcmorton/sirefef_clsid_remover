@@ -40,7 +40,22 @@ goto repair
 cls
 reg add HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 /ve /t reg_expand_sz /d ^%systemroot^%\system32\wbem\wbemess.dll /f
 reg delete HKCU\Software\Classes\clsid\{42aedc87-2188-41fd-b9a3-0c966feabec1} /f
-goto detect
+goto check
+
+:check
+reg query HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 | find /i "wbemess.dll" > null
+if %errorlevel% == 0 goto detect
+if %errorlevel% == 1 goto still_infected
+
+reg query HKCU\Software\Classes\clsid\{42aedc87-2188-41fd-b9a3-0c966feabec1}
+if %errorlevel% == 0 goto detect
+if %errorlevel% == 1 goto still_infected
+
+:still_infected
+echo.
+echo Something didn't go as planned here.
+pause
+goto error
 
 :detect
 SET Version=Unknown
