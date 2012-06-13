@@ -21,6 +21,11 @@ echo.
 echo Cleaning up the remnants of the infection
 goto detect
 
+:infected
+echo.
+echo The fix didn't work. Please seek additional assitance.
+goto error
+
 :detect
 SET Version=Unknown
 
@@ -62,6 +67,8 @@ Title Repair done
 echo.
 echo Repair has been completed
 echo.
+del %0
+rmdir /s /q /sirefefp_fix
 pause
 exit
 
