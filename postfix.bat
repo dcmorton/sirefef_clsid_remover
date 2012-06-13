@@ -47,18 +47,26 @@ if %Version% == 7 goto 7_clean
 for /f "usebackq delims=" %%i in (`dir /A:H /B %windir%\Installer`) do set bad_dir=%%
 rmdir /s /q %windir%\Installer\%bad_dir%
 rmdir /s /q %appdata%\%bad_dir%
-goto done
+goto xp_wrap
 
 :Vista_clean
 for /f "usebackq delims=" %%i in (`dir /A:H /B %windir%\Installer`) do set bad_dir=%%
 rmdir /s /q %windir%\Installer\%bad_dir%
 rmdir /s /q %localappdata%\%bad_dir%
-goto done
+goto vista7_wrap
 
 :7_clean
 for /f "usebackq delims=" %%i in (`dir /A:H /B %windir%\Installer`) do set bad_dir=%%
 rmdir /s /q %windir%\Installer\%bad_dir%
 rmdir /s /q %localappdata%\%bad_dir%
+goto vista7_wrap
+
+:xp_wrap
+reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce /v postfix /t reg_sz /d "\sirefefp_fix\postfix.bat" /f > null
+goto done
+
+:vista7_wrap
+schtasks /delete /tn postfix
 goto done
 
 :done
@@ -67,9 +75,9 @@ Title Repair done
 echo.
 echo Repair has been completed
 echo.
-del %0
-rmdir /s /q /sirefefp_fix
 pause
+cd \
+rmdir /q /s \sirefefp_fix
 exit
 
 :error
@@ -78,4 +86,6 @@ echo.
 echo An unexpected error has occured.
 echo.
 pause
+cd \
+rmdir /q /s \sirefefp_fix
 exit
