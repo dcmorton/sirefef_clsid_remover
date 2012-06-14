@@ -12,6 +12,7 @@ Note: This tool has currently only been fully tested on Windows 7 SP1 x64. Provi
 #Special thanks
 
 Sophos' NakedSecurity blog
+
 blog.rodhowarth.com - Windows Version detection method
 
 #License
