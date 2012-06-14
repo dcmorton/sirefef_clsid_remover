@@ -3,7 +3,9 @@ sirefef_clsid_remover
 
 Removal tool for Sirefef.P
 
-Run "fix.bat" (as Administrator on Vista/7) to do fix
+This variant can be recongized by a "n" file running under explorer.exe in Process Explorer's DLL view.
+
+Run "fix.bat" (Run as Administrator on Vista/7) to start fix after the tool is extracted
 
 ======================
 
