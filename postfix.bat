@@ -24,6 +24,7 @@ goto detect
 :infected
 echo.
 echo The fix didn't work. Please seek additional assitance.
+pause
 goto error
 
 :detect
