@@ -46,20 +46,20 @@ if %Version% == 7 goto 7_clean
 
 :XP_clean
 for /f "usebackq delims=" %%i in (`dir /A:H /B %windir%\Installer`) do set bad_dir=%%i
-rmdir /s /q %windir%\Installer\%bad_dir%
-rmdir /s /q %appdata%\%bad_dir%
+rmdir /s /q "%windir%\Installer\%bad_dir%"
+rmdir /s /q "%appdata%\%bad_dir%"
 goto xp_wrap
 
 :Vista_clean
 for /f "usebackq delims=" %%i in (`dir /A:H /B %windir%\Installer`) do set bad_dir=%%i
-rmdir /s /q %windir%\Installer\%bad_dir%
-rmdir /s /q %localappdata%\%bad_dir%
+rmdir /s /q "%windir%\Installer\%bad_dir%"
+rmdir /s /q "%localappdata%\%bad_dir%"
 goto vista7_wrap
 
 :7_clean
-for /f "usebackq delims=" %%i in (`dir /A:H /B %windir%\Installer`) do set bad_dir=%%i
-rmdir /s /q %windir%\Installer\%bad_dir%
-rmdir /s /q %localappdata%\%bad_dir%
+for /f "usebackq delims=" %%i in (`dir /A^:H /B %windir%\Installer`) do set bad_dir=%%i
+rmdir /s /q "%windir%\Installer\%bad_dir%"
+rmdir /s /q "%localappdata%\%bad_dir%"
 goto vista7_wrap
 
 :xp_wrap
