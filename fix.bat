@@ -10,7 +10,7 @@ echo found in Process Explorer in DLL view for explorer.exe
 echo.
 pause
 
-reg query HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 | find /i "wbemess.dll" > null
+reg query HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 /ve | find /i "wbemess.dll" > null
 if %errorlevel% == 0 goto not_infected
 if %errorlevel% == 1 goto infected
 
@@ -43,7 +43,7 @@ reg delete HKCU\Software\Classes\clsid\{42aedc87-2188-41fd-b9a3-0c966feabec1} /f
 goto check
 
 :check
-reg query HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 | find /i "wbemess.dll" > null
+reg query HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 /ve | find /i "wbemess.dll" > null
 if %errorlevel% == 0 goto detect
 if %errorlevel% == 1 goto still_infected
 
