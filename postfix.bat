@@ -11,8 +11,8 @@ if %errorlevel% == 1 goto infected
 
 :check
 reg query HKCU\Software\Classes\clsid\{42aedc87-2188-41fd-b9a3-0c966feabec1}
-if %errorlevel% == 0 goto not_infected
-if %errorlevel% == 1 goto infected
+if %errorlevel% == 0 goto infected
+if %errorlevel% == 1 goto not_infected
 
 :not_infected
 cls

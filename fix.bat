@@ -49,8 +49,8 @@ if %errorlevel% == 1 goto still_infected
 
 :check2
 reg query HKCU\Software\Classes\clsid\{42aedc87-2188-41fd-b9a3-0c966feabec1}
-if %errorlevel% == 0 goto detect
-if %errorlevel% == 1 goto still_infected
+if %errorlevel% == 0 goto still_infected
+if %errorlevel% == 1 goto detect
 
 :still_infected
 echo.
