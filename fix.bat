@@ -44,9 +44,10 @@ goto check
 
 :check
 reg query HKLM\Software\Classes\CLSID\{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}\InprocServer32 /ve | find /i "wbemess.dll" > null
-if %errorlevel% == 0 goto detect
+if %errorlevel% == 0 goto check2
 if %errorlevel% == 1 goto still_infected
 
+:check2
 reg query HKCU\Software\Classes\clsid\{42aedc87-2188-41fd-b9a3-0c966feabec1}
 if %errorlevel% == 0 goto detect
 if %errorlevel% == 1 goto still_infected
